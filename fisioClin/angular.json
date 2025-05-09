@@ -28,13 +28,12 @@
             ],
             "styles": [
               "node_modules/@clr/ui/clr-ui.min.css",
-              "node_modules/@clr/icons/clr-icons.min.css", 
               "node_modules/@clr/icons/clr-icons.min.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "src/styles.css"
-              
             ],
             "scripts": [
-              "node_modules/@clr/icons/clr-icons.min.js" 
+              "node_modules/@clr/icons/clr-icons.min.js"
             ]
           },
           "configurations": {
@@ -89,11 +88,7 @@
                 "glob": "**/*",
                 "input": "public"
               }
-            ],
-            "styles": [
-              "src/styles.css"
-            ],
-            "scripts": []
+            ]
           }
         }
       }

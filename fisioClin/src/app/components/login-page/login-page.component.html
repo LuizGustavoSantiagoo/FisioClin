@@ -1,53 +1,29 @@
 <div class="login-wrapper">
-    <form class="login">
+    <form class="login" (ngSubmit)="onSubmit()">
         <div class="login-header">
-            <div class="logo"></div>
-            <div class="actions">
-                <clr-dropdown>
-                    <clr-dropdown-menu>
-                        <div aria-label="Language 1" clrDropdownItem>Language 1</div>
-                        <div aria-label="Language 2" clrDropdownItem>Language 2</div>
-                        <div aria-label="Language 3" clrDropdownItem>Language 3</div>
-                    </clr-dropdown-menu>
-                </clr-dropdown>
-            </div>
+            <section class="title">
+                <div class="welcome">Bem vindo a</div>
+                <div>FisioClin</div>
+            </section>
         </div>
         <div class="login-body">
-            <section class="title">
-                <div class="welcome">Welcome to</div>
-                <div>Company Product Name</div>
-                <div class="hint">Product tagline</div>
-            </section>
             <div class="login-group">
-                <clr-select-container>
-                    <label>User Role</label>
-                    <select clrSelect name="type" [(ngModel)]="form.type">
-                        <option value="local">Local Users</option>
-                        <option value="admin">Administrator</option>
-                    </select>
-                </clr-select-container>
-                <clr-input-container>
-                    <label class="clr-sr-only">E-mail</label>
-                    <input type="text" autocomplete="username" name="username" clrInput placeholder="Enter e-mail" [(ngModel)]="form.username" />
+                <clr-input-container class="my-input">
+                    <label>CPF</label>
+                    <input type="text" autocomplete="username" name="username" clrInput placeholder="Usuario"
+                        [(ngModel)]="form.username" />
                 </clr-input-container>
-                <clr-password-container>
-                    <label class="clr-sr-only">Password</label>
-                    <input type="password" autocomplete="current-password" name="password" clrInput placeholder="Enter password" [(ngModel)]="form.password" />
-                </clr-password-container>
-                <clr-checkbox-wrapper>
-                    <label>Remember me</label>
-                    <input type="checkbox" name="rememberMe" clrCheckbox [(ngModel)]="form.rememberMe" />
-                </clr-checkbox-wrapper>
-                <div class="error active">Invalid user name or password</div>
-                <button type="submit" class="btn btn-primary">Log in</button>
-                <a href="javascript://" class="signup">Sign up for an account</a>
+                <div class="pass">
+                    <clr-input-container class="my-input" id="senha">
+                        <label>Senha</label>
+                        <input type="password" autocomplete="password" name="senha" clrInput placeholder="senha"
+                            [(ngModel)]="form.password" />
+                    </clr-input-container>
+                    <clr-icon shape="eye" *ngIf="!showPassword" (click)="togglePassword()"></clr-icon>
+                    <clr-icon shape="eye-hide" *ngIf="showPassword" (click)="togglePassword()"></clr-icon>
+                </div>
+                <button type="submit" class="btn btn-primary my-button">Entrar</button>
             </div>
-        </div>
-        <div class="login-footer">
-            <span class="copyright">
-                Copyright © 2016-2025 Broadcom. All Rights Reserved. The term “Broadcom” refers to Broadcom Inc.
-                <a href="javascript://">Terms</a> | <a href="javascript://">Privacy</a> | <a href="javascript://">California Privacy Rights</a>
-            </span>
         </div>
     </form>
 </div>
