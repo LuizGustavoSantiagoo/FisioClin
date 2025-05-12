@@ -1,1 +1,5 @@
-/* You can add global styles to this file, and also import other style files */
+/* No arquivo styles.css ou styles.scss */
+@import '../node_modules/@clr/icons/clr-icons.min.css';
+@import '../node_modules/@cds/core/global.min.css';
+@import '../node_modules/@cds/core/styles/theme.dark.min.css';
+@import '../node_modules/@clr/ui/clr-ui.min.css';

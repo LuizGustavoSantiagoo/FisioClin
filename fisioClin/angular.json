@@ -27,9 +27,14 @@
               }
             ],
             "styles": [
+              "node_modules/@clr/ui/clr-ui.min.css",
+              "node_modules/@clr/icons/clr-icons.min.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/@clr/icons/clr-icons.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -83,14 +88,13 @@
                 "glob": "**/*",
                 "input": "public"
               }
-            ],
-            "styles": [
-              "src/styles.css"
-            ],
-            "scripts": []
+            ]
           }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "7482cc1f-d28d-4446-89aa-fff16c2a040b"
   }
 }

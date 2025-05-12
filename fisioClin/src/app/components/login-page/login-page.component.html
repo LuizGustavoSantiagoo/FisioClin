@@ -1,0 +1,32 @@
+<div class="login-wrapper">
+    <form class="login" (ngSubmit)="onSubmit()">
+        <div class="login-header">
+            <section class="title">
+                <div class="welcome">Bem vindo a</div>
+                <div>FisioClin</div>
+            </section>
+        </div>
+        <div class="login-body">
+
+            <div id="alerta"></div>
+
+            <div class="login-group">
+                <clr-input-container class="my-input">
+                    <label>CPF</label>
+                    <input type="text" autocomplete="username" name="username" clrInput placeholder="Usuario"
+                        [(ngModel)]="form.username" />
+                </clr-input-container>
+                <div class="pass">
+                    <clr-input-container class="my-input" id="senha">
+                        <label>Senha</label>
+                        <input type="password" autocomplete="password" name="senha" clrInput placeholder="senha"
+                            [(ngModel)]="form.password" />
+                    </clr-input-container>
+                    <clr-icon shape="eye" *ngIf="!showPassword" (click)="togglePassword()"></clr-icon>
+                    <clr-icon shape="eye-hide" *ngIf="showPassword" (click)="togglePassword()"></clr-icon>
+                </div>
+                <button type="submit" class="btn btn-primary my-button">Entrar</button>
+            </div>
+        </div>
+    </form>
+</div>
