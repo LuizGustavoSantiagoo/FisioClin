@@ -8,6 +8,7 @@ import { AuthService } from '../../services/AuthService'; // Importando AuthServ
   selector: 'app-login-page',
   standalone: true,
   templateUrl: './login-page.component.html',
+  styleUrls: ['./login-page.component.css'],
   imports: [
     CommonModule,
     FormsModule,
@@ -24,29 +25,28 @@ export class LoginPageComponent {
     password: '',
   };
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) { }
 
   onSubmit() {
     this.authService.login(this.form).subscribe({
       next: (res) => {
-        console.log('Login bem-sucedido:', res);
-        // Redirecionar, salvar token, etc.
+        this.authService.redirectTo('admin-home');
       },
       error: (err) => {
-        console.error('Erro no login:', err);
-        // Mostrar mensagem ao usuário
+
+
       }
     });
   }
-  
+
   showPassword = false;
 
   togglePassword() {
-  this.showPassword = !this.showPassword;
-  const input = document.querySelector('input[name="senha"]') as HTMLInputElement;
-  input.type = this.showPassword ? 'text' : 'password';
-  console.log(this.showPassword)
-}
+    this.showPassword = !this.showPassword;
+    const input = document.querySelector('input[name="senha"]') as HTMLInputElement;
+    input.type = this.showPassword ? 'text' : 'password';
+    console.log(this.showPassword)
+  }
 }
 
 

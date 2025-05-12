@@ -7,10 +7,13 @@ import { FormsModule } from '@angular/forms';
 import { importProvidersFrom } from '@angular/core';
 import '@clr/icons';
 import '@clr/icons/shapes/all-shapes';
+import { provideRouter } from '@angular/router';
+import { routes } from './app.routes';
 
 bootstrapApplication(AppComponent, {
   providers: [
-    provideHttpClient(), // 👈 Aqui está o HttpClient agora incluído
+    provideRouter(routes),
+    provideHttpClient(), 
     importProvidersFrom(
       BrowserAnimationsModule,
       ClarityModule,

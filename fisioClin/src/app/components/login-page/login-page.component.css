@@ -65,3 +65,22 @@ clr-icon {
 clr-icon:hover { 
     color: dodgerblue;
 }
+
+.errorAlert {
+    width: 100%;
+    background-color: #ffcf4d;
+    border: 1px solid #ac8c34;
+    border-radius: 10px;
+    display: none;
+    padding: 5%;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    font-size: 0.8rem;
+    color: yellow;
+}
+
+.errorAlert h1 {
+    margin: 0;
+    padding: 0;
+}

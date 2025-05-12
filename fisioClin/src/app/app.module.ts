@@ -3,9 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { ClarityModule } from '@clr/angular';
 import { ClrDropdownModule } from '@clr/angular';
-import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing-module';
-import { LoginPageComponent } from './components/login-page/login-page.component';
 import { CommonModule } from '@angular/common';
 
 @NgModule({
@@ -15,7 +13,7 @@ import { CommonModule } from '@angular/common';
     ClarityModule,
     FormsModule,
     ClrDropdownModule,
-    CommonModule
+    CommonModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
