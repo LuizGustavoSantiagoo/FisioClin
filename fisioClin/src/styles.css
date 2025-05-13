@@ -3,3 +3,21 @@
 @import '../node_modules/@cds/core/global.min.css';
 @import '../node_modules/@cds/core/styles/theme.dark.min.css';
 @import '../node_modules/@clr/ui/clr-ui.min.css';
+
+@font-face {
+    font-family: 'poppins';
+    src: url(../src/assets/fonts/Poppins/Poppins-Medium.ttf) format('ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'raleway';
+    src: url(../src/assets/fonts/Raleway/Raleway-VariableFont_wght.ttf) format('ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+*, html, body {
+    font-family: 'raleway', 'poppins', sans-serif;
+}

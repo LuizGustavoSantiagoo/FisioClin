@@ -1,0 +1,25 @@
+.header,
+.custom-vertical-nav {
+    background-color: #333333;
+    color: #A7C7E7;
+}
+
+.custom-vertical-nav a:hover {
+    background-color: #A7C7E7;
+    color: #333333;
+}
+
+.custom-vertical-nav a {
+    margin: 0 0 0 5%;
+    padding: 5%;
+}
+
+.title {
+    padding: 5%;
+}
+
+.content-area {
+    background: url(../../../assets/imgs/logo_semfundo.png) no-repeat center center;
+    background-size: auto;
+    background-repeat: no-repeat;
+}
