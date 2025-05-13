@@ -1,0 +1,16 @@
+<div class="main-container">
+  <header class="header">
+    <div class="branding">
+      <span class="title">FisioClin</span>
+    </div>
+  </header>
+  <div class="content-container">
+    <clr-vertical-nav [clrVerticalNavCollapsible]="true" [clrVerticalNavCollapsed]="false" class="custom-vertical-nav">
+      <a clrVerticalNavLink routerLink="/home" routerLinkActive="active"><cds-icon shape="home" solid="true"></cds-icon> Home</a>
+      <a clrVerticalNavLink routerLink="/admin-page" routerLinkActive="active"><cds-icon shape="administrator" solid="true"></cds-icon> Admin page</a>
+    </clr-vertical-nav>
+    <div class="content-area">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

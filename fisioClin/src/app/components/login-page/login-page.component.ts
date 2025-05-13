@@ -30,11 +30,9 @@ export class LoginPageComponent {
   onSubmit() {
     this.authService.login(this.form).subscribe({
       next: (res) => {
-        this.authService.redirectTo('admin-home');
+        this.authService.redirectTo('home');
       },
       error: (err) => {
-
-
       }
     });
   }
