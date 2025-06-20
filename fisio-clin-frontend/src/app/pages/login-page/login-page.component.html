@@ -6,10 +6,10 @@
     <div class="content">
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">CPF</label>
-                <input type="number" class="form-control" formControlName="cpf" id="exampleInputEmail1"
-                    placeholder="Inserir CPF">
-                <div *ngIf="loginForm.get('')?.invalid && loginForm.get('')?.touched" class="text-danger">O CPF é
+                <label for="exampleInputEmail1" class="form-label">E-MAIL</label>
+                <input type="text" class="form-control" formControlName="email" id="exampleInputEmail1"
+                    placeholder="Inserir email">
+                <div *ngIf="loginForm.get('')?.invalid && loginForm.get('')?.touched" class="text-danger">O Email é
                     Obrigatorio</div>
             </div>
             <div class="mb-3">

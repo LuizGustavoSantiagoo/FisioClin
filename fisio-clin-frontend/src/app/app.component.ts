@@ -7,7 +7,7 @@ import {MatIconModule} from '@angular/material/icon';
   standalone: true,
   imports: [
     RouterOutlet,
-    MatIconModule 
+    MatIconModule
    ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

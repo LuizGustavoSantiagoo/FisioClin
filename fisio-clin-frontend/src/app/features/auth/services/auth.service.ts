@@ -9,16 +9,16 @@ import { environment } from '../../../../environments/environments';
 })
 export class AuthService {
 
-  private apiUrl = environment.apiUrl; 
+  private apiUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) { } 
+  constructor(private http: HttpClient) { }
 
   /**
-   * 
+   *
    * @param credentials
-   * @returns 
+   * @returns
    */
-  login(credentials: { cpf: string, senha: string }): Observable<any> {
+  login(credentials: { email: string, senha: string }): Observable<any> {
     // O endpoint de login no Laravel geralmente é /api/login
     return this.http.post(`${this.apiUrl}/login`, credentials);
   }
