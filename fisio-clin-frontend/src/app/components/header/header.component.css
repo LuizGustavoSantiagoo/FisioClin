@@ -1,16 +1,71 @@
-#cabecalho,
+
+#cabecalho {
+  height: 100vh; /* Ocupa 100% da altura da viewport */
+  display: flex; /* Torna-o um container flexível */
+  flex-direction: column; /* Para que seus filhos se empilhem, se houver mais de um */
+  width: 100%; /* Ocupa a largura total */
+}
+
 .mat-drawer-container {
-  height: 10vh;
-  background-color: #22394E;
+  height: 100%; /* Agora ocupará 100% da altura de seu pai (#cabecalho) */
+  background-color: #22394E; 
+}
+
+.menu-lat {
+  width: 250px; /* Largura do seu menu lateral */
+  background-color: #22394E; /* Cor de fundo do menu lateral */
+  color: white; /* Cor do texto dentro do menu lateral */
+  padding: 20px 0; /* Adiciona um padding para o conteúdo interno */
+  box-sizing: border-box; /* Inclui o padding na largura/altura total */
+}
+
+.mat-drawer-content {
+  display: flex;            /* Torna este container flexível */
+  flex-direction: column;   /* Organiza os filhos (seus botões) em coluna */
+  align-items: flex-start;  /* Alinha os itens ao início (esquerda) */
+  height: 100%;             /* Garante que o conteúdo ocupe a altura total do drawer */
+  width: 100%;              /* Garante que o conteúdo ocupe a largura total do drawer */
+  gap: 5px;                 /* Espaçamento entre os itens (botões) */
+  box-sizing: border-box;   /* Inclui padding/border no cálculo do box */
+}
+
+.buttonMenu {
+  width: 100%; /* Faz o botão ocupar a largura total do seu contêiner flex (mat-drawer-content) */
+  border: none;
+  background-color: #22394e6c; /* Cor de fundo dos botões (com transparência) */
+  margin-bottom: 1px; /* Espaçamento entre os botões */
+  color: white; /* Cor do texto do botão */
+  text-align: left; /* Alinha o texto do botão à esquerda */
+  padding: 10px 20px; /* Padding interno do botão */
+  box-sizing: border-box; /* Garante que padding não adicione largura */
+  cursor: pointer;
+  border-top: 1px solid #f0f2f5;
+  margin: 3px 0 0 0;
+}
+
+.buttonMenu:hover {
+  background-color: #2364a1; 
 }
 
 .example-sidenav-content {
-  width: 10%;
-  height: 10%;
+  width: 100%; 
+  height: 100%; 
+  flex-grow: 1; 
+  overflow-y: auto; 
+  background-color: #f0f2f5; 
+  padding: 20px; 
+  box-sizing: border-box;
 }
 
-.mat-drawer {
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; 
+}
+
+app-root { 
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  min-height: 100vh;
 }

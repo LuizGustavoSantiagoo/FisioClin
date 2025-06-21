@@ -1,0 +1,30 @@
+#cabecalho,
+.mat-drawer-container {
+  height: 10vh;
+  background-color: #22394E;
+}
+
+.example-sidenav-content {
+  width: 10%;
+  height: 10%;
+}
+
+.mat-drawer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.buttonMenu {
+  width: 100%;
+  border: none;
+  background-color: #22394e6c;
+  margin-bottom: 1px;
+}
+.buttonMenu:hover {
+  background-color: #22394E;
+}
+
+.mat-drawer-inner-container {
+  height: 100%;
+}
