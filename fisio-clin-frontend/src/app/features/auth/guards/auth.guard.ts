@@ -1,21 +1,25 @@
-import { inject } from '@angular/core';
-import { CanActivateFn, Router } from '@angular/router';
-import { AuthService } from '../services/auth.service'; // Certifique-se de que o caminho está correto
+// src/app/features/auth/guards/auth.guard.ts
+import { Injectable } from '@angular/core';
+import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { Observable } from 'rxjs';
+import { AuthService } from '../services/auth.service'; 
 
-export const authGuard: CanActivateFn = (route, state) => {
-  // const authService = inject(AuthService); // AuthService pode ser injetado se você tiver lógica de verificação mais complexa lá
-  const router = inject(Router);
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthGuard implements CanActivate {
 
-  // Verifica se o token existe no localStorage
-  const authToken = localStorage.getItem('auth_token');
+  constructor(private authService: AuthService, private router: Router) {}
 
-  if (authToken) {
-    // Se o token existe, permite o acesso à rota
-    return true;
-  } else {
-    // Se o token NÃO existe, redireciona para a página de login
-    console.warn('Tentativa de acesso a rota protegida sem token. Redirecionando para login.');
-    router.navigate(['/login']); // Redireciona para sua rota de login
-    return false; // Bloqueia o acesso à rota
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+
+    if (this.authService.isLoggedIn()) { 
+      return true;
+    } else {
+      console.warn('Tentativa de acesso a rota protegida sem token. Redirecionando para login.');
+      return this.router.createUrlTree(['/login']); 
+    }
   }
-};
+}
