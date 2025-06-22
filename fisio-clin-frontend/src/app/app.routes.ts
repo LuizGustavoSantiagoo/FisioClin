@@ -3,6 +3,7 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { AtendimentosComponent } from './pages/atendimentos/atendimentos.component';
 import { HomeComponent } from './pages/home/home.component';
 import { AuthGuard } from './features/auth/guards/auth.guard';
+import { CadUsuarioComponent } from './pages/cad-usuario/cad-usuario.component';
 export const routes: Routes = [
   {
     path: '',
@@ -12,6 +13,11 @@ export const routes: Routes = [
   {
     path: 'atendimentos',
     component: AtendimentosComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'cadUsers',
+    component: CadUsuarioComponent,
     canActivate: [AuthGuard]
   },
   {

@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, tap, catchError, throwError } from 'rxjs'; // Importe BehaviorSubject, tap, catchError, throwError
 import { environment } from '../../../../environments/environments';
-import { User, LoginResponse } from '../../../interfaces/user.interface'; // Importe suas interfaces
+import { User, LoginResponse } from '../../../interfaces/user.interface';
+import {Paciente, CadastroResponse} from '../../../interfaces/paciente.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -113,23 +114,5 @@ export class AuthService {
    */
   isLoggedIn(): boolean {
     return !!this.getToken() && !!this.getCurrentUser();
-  }
-
-  /**
-   * Verifica se o usuário logado é um ADMIN.
-   * @returns true se for ADMIN, false caso contrário.
-   */
-  isAdmin(): boolean {
-    const user = this.getCurrentUser();
-    return user ? user.role === 'ADMIN' : false;
-  }
-
-  /**
-   * Verifica se o usuário logado é um FISIOTERAPEUTA.
-   * @returns true se for FISIOTERAPEUTA, false caso contrário.
-   */
-  isFisioterapeuta(): boolean {
-    const user = this.getCurrentUser();
-    return user ? user.role === 'FISIOTERAPEUTA' : false;
   }
 }

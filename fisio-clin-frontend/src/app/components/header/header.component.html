@@ -1,28 +1,26 @@
 <header id="cabecalho">
   <mat-drawer-container class="example-container" autosize>
-    <mat-drawer #drawer class="menu-lat" mode="side">
-
-      <div
-        class="d-flex align-items-center flex-column justify-content-center border bg-white rounded text-secondary w-75 m-auto">
+    <mat-drawer #drawer class="menu-lat" mode="over">
+      <div class="d-flex align-items-center flex-column justify-content-center border bg-white rounded text-secondary w-75 m-auto">
         <h1>FisioClin</h1>
         <p>{{currentUser?.name }}</p>
       </div>
       @if (currentUser?.role === "ADMIN") {
-      <button class="buttonMenu">Usuarios</button>
-      <button class="buttonMenu">Configurações</button>
+        <button class="buttonMenu d-flex align-items-center" routerLink="/usuarios" (click)="drawer.close()"><mat-icon>person_add</mat-icon> Usuarios</button>
+        <button class="buttonMenu d-flex align-items-center" routerLink="/configuracoes" (click)="drawer.close()"><mat-icon>settings</mat-icon> Configurações</button>
       }
-      @if (currentUser?.role === "FISIOTERAPEUTA") {
-      <button class="buttonMenu">Perfil</button>
-      <button class="buttonMenu" routerLink="/atendimentos" (click)="drawer.close()">Atendimentos</button>
-      }
-      <button class="buttonMenu" (click)="onLogout()">Sair</button>
+      <button class="buttonMenu d-flex align-items-center" routerLink="/perfil" (click)="drawer.close()"><mat-icon>person</mat-icon>Perfil</button>
+      <button class="buttonMenu d-flex align-items-center" routerLink="/atendimentos" (click)="drawer.close()"><mat-icon>groups</mat-icon> Atendimentos</button>
+      <button class="buttonMenu d-flex align-items-center" routerLink="/cadUsers" (click)="drawer.close()"><mat-icon>group</mat-icon> Pacientes</button>
+      <button class="buttonMenu d-flex align-items-center" (click)="onLogout()"><mat-icon>sensor_door</mat-icon> Sair</button>
     </mat-drawer>
 
     <div class="example-sidenav-content">
       <button type="button" class="menu-b" matButton (click)="toggleSidenavAndButton()" mat-icon-button>
-        <mat-icon>menu</mat-icon> </button>
-      <router-outlet></router-outlet>
+        <mat-icon>menu</mat-icon>
+      </button>
+      
+      <router-outlet></router-outlet> 
     </div>
-
   </mat-drawer-container>
 </header>

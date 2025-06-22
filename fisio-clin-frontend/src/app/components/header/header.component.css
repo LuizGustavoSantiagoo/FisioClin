@@ -1,71 +1,115 @@
+/* src/app/components/header/header.component.css */
 
+/* Garante que o header ocupe toda a altura e seja um container flexível */
 #cabecalho {
-  height: 100vh; /* Ocupa 100% da altura da viewport */
-  display: flex; /* Torna-o um container flexível */
-  flex-direction: column; /* Para que seus filhos se empilhem, se houver mais de um */
-  width: 100%; /* Ocupa a largura total */
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
+/* O mat-drawer-container deve preencher o header */
 .mat-drawer-container {
-  height: 100%; /* Agora ocupará 100% da altura de seu pai (#cabecalho) */
-  background-color: #22394E; 
+  height: 100%;
+  background-color: transparent;
+  /* REMOVIDO: display: flex; e flex-grow: 1; daqui. */
+  /* Com mode="over", o mat-sidenav-container NÃO usa flexbox para seus filhos diretos.
+     Ele posiciona o drawer em overlay (absolutamente), e o conteúdo principal flui normalmente. */
+  position: relative; /* Importante para o posicionamento absoluto do mat-drawer */
 }
 
+/* Estilos para o mat-drawer (o próprio menu lateral) */
 .menu-lat {
-  width: 250px; /* Largura do seu menu lateral */
-  background-color: #22394E; /* Cor de fundo do menu lateral */
-  color: white; /* Cor do texto dentro do menu lateral */
-  padding: 20px 0; /* Adiciona um padding para o conteúdo interno */
-  box-sizing: border-box; /* Inclui o padding na largura/altura total */
+  width: 250px;
+  background-color: #22394E;
+  color: white;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centraliza horizontalmente o bloco de info e botões */
+  padding: 0;
+  z-index: 10; /* Garante que o sidenav fique por cima do conteúdo */
+  box-shadow: 2px 0 6px rgba(0,0,0,0.2); /* Adiciona uma sombra para destacar o overlay */
 }
 
+/* Estilos para o bloco de informações do usuário no topo do sidenav */
+.menu-lat > .d-flex.align-items-center.flex-column.justify-content-center {
+    background-color: white;
+    color: #22394E;
+    width: 90%;
+    margin: 20px auto;
+    padding: 15px 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    flex-shrink: 0;
+}
+
+/* Estilos para o conteúdo principal dentro do mat-drawer (os botões de navegação) */
+/* (Este é o .mat-drawer-content gerado pelo Angular Material para o conteúdo do sidenav) */
 .mat-drawer-content {
-  display: flex;            /* Torna este container flexível */
-  flex-direction: column;   /* Organiza os filhos (seus botões) em coluna */
-  align-items: flex-start;  /* Alinha os itens ao início (esquerda) */
-  height: 100%;             /* Garante que o conteúdo ocupe a altura total do drawer */
-  width: 100%;              /* Garante que o conteúdo ocupe a largura total do drawer */
-  gap: 5px;                 /* Espaçamento entre os itens (botões) */
-  box-sizing: border-box;   /* Inclui padding/border no cálculo do box */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 100%;
+    width: 100%;
+    gap: 5px;
+    box-sizing: border-box;
 }
 
+/* Estilos para os botões do menu */
 .buttonMenu {
-  width: 100%; /* Faz o botão ocupar a largura total do seu contêiner flex (mat-drawer-content) */
+  width: 100%;
   border: none;
-  background-color: #22394e6c; /* Cor de fundo dos botões (com transparência) */
-  margin-bottom: 1px; /* Espaçamento entre os botões */
-  color: white; /* Cor do texto do botão */
-  text-align: left; /* Alinha o texto do botão à esquerda */
-  padding: 10px 20px; /* Padding interno do botão */
-  box-sizing: border-box; /* Garante que padding não adicione largura */
+  background-color: transparent;
+  color: white;
+  text-align: left;
+  padding: 10px 20px;
+  box-sizing: border-box;
   cursor: pointer;
-  border-top: 1px solid #f0f2f5;
+  border-top: 1px solid rgba(240, 242, 245, 0.1);
   margin: 3px 0 0 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background-color 0.2s ease;
 }
 
 .buttonMenu:hover {
-  background-color: #2364a1; 
+  background-color: #2364a1;
 }
 
+/* Estilos para o example-sidenav-content (área de conteúdo principal da página) */
+/* Esta área SEMPRE ocupará 100% da largura, pois o sidenav estará em overlay */
 .example-sidenav-content {
-  width: 100%; 
-  height: 100%; 
-  flex-grow: 1; 
-  overflow-y: auto; 
-  background-color: #f0f2f5; 
-  padding: 20px; 
+  width: 100%; /* Ocupa 100% da largura de seu container (.mat-drawer-container) */
+  height: 100%; /* Ocupa 100% da altura de seu container */
+  overflow-y: auto; /* IMPORTANTE: Adiciona rolagem se o conteúdo for muito grande */
+  background-color: #f0f2f5; /* Cor de fundo para a área principal */
+  padding: 20px; /* Padding interno para o conteúdo da página */
   box-sizing: border-box;
+  
+  /* Mantenha o display flex e flex-direction column para organizar
+     o botão de menu externo e o router-outlet */
+  display: flex;
+  flex-direction: column;
 }
 
+/* Estilos Globais (em src/styles.css ou src/styles.scss) - INALTERADOS */
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-  overflow: hidden; 
+  overflow: hidden;
 }
 
-app-root { 
+app-root {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  width: 100%;
+}
+
+main {
+  width: 85%;
 }

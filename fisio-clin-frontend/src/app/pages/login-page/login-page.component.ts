@@ -32,14 +32,10 @@ export class LoginPageComponent implements OnInit {
   }
 
   onSubmit() {
-    this.errorMessage = ''; // Limpa mensagens de erro anteriores
+    this.errorMessage = '';
 
     if (this.loginForm.valid) {
       const { email, senha } = this.loginForm.value;
-
-      // Chama o método login do AuthService.
-      // O AuthService já cuidará de salvar o token e os dados do usuário no localStorage
-      // e de atualizar seu estado interno (via BehaviorSubject).
       this.authService.login({ email, senha }).subscribe({
         next: (response) => {
           console.log('Login bem-sucedido! O AuthService salvou os dados.', response);
