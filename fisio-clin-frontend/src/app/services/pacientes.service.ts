@@ -17,12 +17,6 @@ export class PacientesService {
     private authService: AuthService
   ) { }
 
-  /**
-   * Cadastra um novo paciente no backend.
-   * Adiciona o token de autenticação no cabeçalho da requisição.
-   * @param paciente Os dados do paciente a serem cadastrados.
-   * @returns Observable da resposta de cadastro.
-   */
   cadastrarPaciente(paciente: Paciente): Observable<CadastroResponse> {
     const authToken = this.authService.getToken();
     const headers = new HttpHeaders({
@@ -30,22 +24,19 @@ export class PacientesService {
       'Authorization': `Bearer ${authToken}`
     });
 
-    return this.http.post<CadastroResponse>(`${this.apiUrl}/pacientes`, paciente, { headers }).pipe(
+    return this.http.post<CadastroResponse>(`${this.apiUrl}/cadastroPaciente`, paciente, { headers }).pipe(
       catchError(httpError => {
         console.error('Erro na requisição HTTP ao cadastrar paciente:', httpError);
         let userMessage = 'Erro desconhecido ao cadastrar paciente.';
 
-        // Tentativa de extrair uma mensagem mais amigável do HttpErrorResponse
         if (httpError.error && httpError.error.message) {
           userMessage = httpError.error.message;
-        } else if (typeof httpError.error === 'string') { // Para erros que são apenas uma string
+        } else if (typeof httpError.error === 'string') {
           userMessage = httpError.error;
         } else if (httpError.message) {
           userMessage = httpError.message;
         }
 
-        // >>>>>>>>>>>>> CORREÇÃO AQUI <<<<<<<<<<<<<<<
-        // Passa a instância do erro diretamente para throwError (RxJS 7+)
         return throwError(() => new Error(userMessage));
       })
     );

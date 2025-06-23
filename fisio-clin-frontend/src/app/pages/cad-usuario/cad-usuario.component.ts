@@ -48,7 +48,7 @@ export class CadUsuarioComponent implements OnInit {
 
       const dadosParaCadastro: Paciente = {
         id: rawValues.id,
-        name: rawValues.name, 
+        name: rawValues.name,
         cpf: String(rawValues.cpf),
         data_nasc: rawValues.data_nasc,
         contato: String(rawValues.contato),
@@ -58,7 +58,7 @@ export class CadUsuarioComponent implements OnInit {
         next: (response) => {
           this.successMessage = response.message || 'Paciente cadastrado com sucesso!';
           console.log('Paciente cadastrado:', response.paciente);
-          this.pacienteForm.reset(); 
+          this.pacienteForm.reset();
         },
         error: (err) => {
           this.errorMessage = err.message || 'Erro desconhecido ao cadastrar paciente. Tente novamente.';
@@ -67,7 +67,6 @@ export class CadUsuarioComponent implements OnInit {
       });
     } else {
       this.errorMessage = 'Por favor, preencha todos os campos obrigatórios corretamente.';
-      // Marca todos os controles do formulário como "touched" para exibir mensagens de erro
       this.pacienteForm.markAllAsTouched();
     }
   }

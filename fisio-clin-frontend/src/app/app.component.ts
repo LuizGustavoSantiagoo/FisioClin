@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { HeaderComponent } from "./components/header/header.component";
+import { MatToolbar } from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-root',
@@ -9,8 +10,9 @@ import { HeaderComponent } from "./components/header/header.component";
   imports: [
     RouterOutlet,
     MatIconModule,
-    HeaderComponent
-],
+    HeaderComponent,
+    MatToolbar
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { HeaderComponent } from '../../components/header/header.component';
 import { MatIconModule } from '@angular/material/icon';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup} from '@angular/forms';
 import { PacientesService } from '../../services/pacientes.service';
 import { Paciente } from '../../interfaces/paciente.interface';
 import { debounceTime, distinctUntilChanged, Subscription } from 'rxjs';
@@ -9,6 +8,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { RouterOutlet, RouterModule } from '@angular/router';
 
 
 @Component({
@@ -18,6 +18,8 @@ import { CommonModule } from '@angular/common';
       CommonModule,
       MatIconModule,
       MatTableModule,
+      RouterOutlet,
+      RouterModule,
       MatProgressSpinnerModule,
       ReactiveFormsModule],
   templateUrl: './atendimentos.component.html',

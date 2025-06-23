@@ -4,6 +4,7 @@ import { AtendimentosComponent } from './pages/atendimentos/atendimentos.compone
 import { HomeComponent } from './pages/home/home.component';
 import { AuthGuard } from './features/auth/guards/auth.guard';
 import { CadUsuarioComponent } from './pages/cad-usuario/cad-usuario.component';
+import { AtendimentoPacienteComponent } from './pages/atendimento-paciente/atendimento-paciente.component';
 export const routes: Routes = [
   {
     path: '',
@@ -18,6 +19,11 @@ export const routes: Routes = [
   {
     path: 'cadUsers',
     component: CadUsuarioComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'atendimentoPaciente/:idPaciente',
+    component: AtendimentoPacienteComponent,
     canActivate: [AuthGuard]
   },
   {

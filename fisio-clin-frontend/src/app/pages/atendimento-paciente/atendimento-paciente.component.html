@@ -1,0 +1,45 @@
+<div class="card shadow w-75 mt-3 m-auto p-2">
+  <div class="grid-paciente">
+
+    <div id="nome">
+      <label for="nome">Nome</label>
+      <input type="text" id="nome" class="form-control mx-1" disabled>
+    </div>
+
+    <div>
+      <label for="cpf">CPF</label>
+      <input type="text" id="cpf" class="form-control mx-1" disabled>
+    </div>
+
+    <div>
+      <label for="data_nasc">Data de nascimento</label>
+      <input type="text" id="data_nasc" class="form-control mx-1" disabled>
+    </div>
+
+  </div>
+
+
+  <div class="att">
+    <form [formGroup]="atendimentoForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="motivo">Motivo do atendimento</label>
+        <textarea formControlName="motivo" id="motivo" class="form-control"></textarea>
+      </div>
+      <div>
+        <label for="queixa">Queixas/Sintomas relatados</label>
+        <textarea formControlName="sintomas" id="queixa" class="form-control"></textarea>
+      </div>
+      <div>
+        <label for="conclusao">Conclusão do atendimento</label>
+        <textarea formControlName="conclusao" id="conclusao" class="form-control"></textarea>
+      </div>
+
+        <input type="text"formControlName="id_fisio" value="{{currentUser?.id }}" hidden>
+        <input type="text"formControlName="id_paciente" value=" " hidden>
+
+      <div class="d-flex justify-content-end">
+        <button class="btn btn-success mt-4">Gravar</button>
+      </div>
+    </form>
+  </div>
+</div>

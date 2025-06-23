@@ -23,7 +23,7 @@
     </mat-drawer>
 
     <div class="example-sidenav-content">
-      <mat-toolbar class="top-toolbar d-flex align-items-center justify-content-between">
+      <mat-toolbar class="top-toolbar d-flex align-items-center justify-content-between" *ngIf="showMenuButton">
         <button type="button" class="menu-b" matButton (click)="toggleSidenavAndButton()" mat-icon-button>
           <mat-icon>menu</mat-icon>
         </button>
@@ -32,9 +32,7 @@
           {{currentUser?.name }}
         </div>
       </mat-toolbar>
-
-      <div class="content-area-scrollable"> <router-outlet></router-outlet>
-      </div>
+      <router-outlet></router-outlet>
     </div>
   </mat-drawer-container>
 </header>

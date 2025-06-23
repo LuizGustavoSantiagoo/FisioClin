@@ -1,6 +1,3 @@
-/* src/app/components/header/header.component.css */
-
-/* Garante que o header ocupe toda a altura e seja um container flexível */
 #cabecalho {
   height: 100vh;
   display: flex;
@@ -8,14 +5,12 @@
   width: 100%;
 }
 
-/* O mat-drawer-container deve preencher o header */
 .mat-drawer-container {
   height: 100%;
   background-color: transparent;
   position: relative;
 }
 
-/* Estilos para o mat-drawer (o próprio menu lateral) */
 .menu-lat {
   width: 250px;
   background-color: #22394E;
@@ -26,34 +21,31 @@
   align-items: center;
   padding: 0;
   z-index: 10;
-  box-shadow: 2px 0 6px rgba(0,0,0,0.2);
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.2);
 }
 
-/* Estilos para o bloco de informações do usuário no topo do sidenav */
-.menu-lat > .d-flex.align-items-center.flex-column.justify-content-center {
-    background-color: white;
-    color: #22394E;
-    width: 90%;
-    margin: 20px auto;
-    padding: 15px 10px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    flex-shrink: 0;
+.menu-lat>.d-flex.align-items-center.flex-column.justify-content-center {
+  background-color: white;
+  color: #22394E;
+  width: 90%;
+  margin: 20px auto;
+  padding: 15px 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  flex-shrink: 0;
 }
 
-/* Estilos para o conteúdo principal dentro do mat-drawer (os botões de navegação) */
 .mat-drawer-content {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    height: 100%;
-    width: 100%;
-    gap: 5px;
-    box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 100%;
+  width: 100%;
+  gap: 5px;
+  box-sizing: border-box;
 }
 
-/* Estilos para os botões do menu */
 .buttonMenu {
   width: 100%;
   border: none;
@@ -75,49 +67,44 @@
   background-color: #2364a1;
 }
 
-/* Estilos para o example-sidenav-content (área de conteúdo principal da página) */
 .example-sidenav-content {
   width: 100%;
   height: 100%;
-  /* REMOVER padding AQUI: O padding será aplicado na .content-area-scrollable */
-  padding: 0; /* <--- REMOVIDO */
+  padding: 0;
   box-sizing: border-box;
   background-color: #f0f2f5;
-  
+
   display: flex;
   flex-direction: column;
-  /* REMOVIDO: align-items: flex-start; para não forçar alinhamento nos filhos */
 }
 
-/* NOVO: Estilos para a mat-toolbar no topo da área de conteúdo */
 .top-toolbar {
-  height: 5vh; /* <-- Use 5vh aqui para 5% da altura da viewport */
-  min-height: 56px; /* Garante uma altura mínima para acessibilidade */
+  height: 5vh;
+  min-height: 56px;
   background-color: white;
   color: #333;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  flex-shrink: 0; /* Impede que encolha */
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   padding: 0 16px;
-  box-sizing: border-box; /* Para incluir padding na altura/largura */
+  box-sizing: border-box;
 }
 
 .top-toolbar .menu-b {
   margin-right: 16px;
 }
 
-/* NOVO: Estilos para a área de conteúdo rolável (que envolve o router-outlet) */
 .content-area-scrollable {
-  flex-grow: 1; /* Faz com que esta div preencha o espaço restante abaixo da toolbar */
+  flex-grow: 1;
   overflow-y: auto;
-  padding: 20px; /* <-- ADICIONADO AQUI o padding para o conteúdo real */
+  padding: 20px;
   box-sizing: border-box;
 }
 
-/* Estilos Globais (em src/styles.css ou src/styles.scss) - INALTERADOS */
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
   padding: 0;
@@ -129,14 +116,4 @@ app-root {
   flex-direction: column;
   min-height: 100vh;
   width: 100%;
-}
-
-/* REGRA PARA O MAIN DO SEU COMPONENTE DE PÁGINA (CADASTRO, ATENDIMENTOS, etc.) */
-main {
-  width: 100%; /* <-- CORRIGIDO para 100% */
-  /* Garante que o main ocupe a largura total de seu pai (.content-area-scrollable) */
-  /* Se tiver margin ou padding no main ou em seus pais internos, remova-os */
-  margin: 0; /* Certifique-se de que não há margens laterais */
-  padding: 0; /* Certifique-se de que não há paddings laterais */
-  box-sizing: border-box;
 }
