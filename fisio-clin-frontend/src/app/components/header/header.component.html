@@ -1,26 +1,40 @@
 <header id="cabecalho">
   <mat-drawer-container class="example-container" autosize>
     <mat-drawer #drawer class="menu-lat" mode="over">
-      <div class="d-flex align-items-center flex-column justify-content-center border bg-white rounded text-secondary w-75 m-auto">
+      <div
+        class="d-flex align-items-center flex-column justify-content-center border bg-white rounded text-secondary w-75 m-auto">
         <h1>FisioClin</h1>
         <p>{{currentUser?.name }}</p>
       </div>
       @if (currentUser?.role === "ADMIN") {
-        <button class="buttonMenu d-flex align-items-center" routerLink="/usuarios" (click)="drawer.close()"><mat-icon>person_add</mat-icon> Usuarios</button>
-        <button class="buttonMenu d-flex align-items-center" routerLink="/configuracoes" (click)="drawer.close()"><mat-icon>settings</mat-icon> Configurações</button>
+      <button class="buttonMenu d-flex align-items-center" routerLink="/usuarios"
+        (click)="drawer.close()"><mat-icon>person_add</mat-icon> Usuarios</button>
+      <button class="buttonMenu d-flex align-items-center" routerLink="/configuracoes"
+        (click)="drawer.close()"><mat-icon>settings</mat-icon> Configurações</button>
       }
-      <button class="buttonMenu d-flex align-items-center" routerLink="/perfil" (click)="drawer.close()"><mat-icon>person</mat-icon>Perfil</button>
-      <button class="buttonMenu d-flex align-items-center" routerLink="/atendimentos" (click)="drawer.close()"><mat-icon>groups</mat-icon> Atendimentos</button>
-      <button class="buttonMenu d-flex align-items-center" routerLink="/cadUsers" (click)="drawer.close()"><mat-icon>group</mat-icon> Pacientes</button>
-      <button class="buttonMenu d-flex align-items-center" (click)="onLogout()"><mat-icon>sensor_door</mat-icon> Sair</button>
+      <button class="buttonMenu d-flex align-items-center" routerLink="/perfil"
+        (click)="drawer.close()"><mat-icon>person</mat-icon>Perfil</button>
+      <button class="buttonMenu d-flex align-items-center" routerLink="/atendimentos"
+        (click)="drawer.close()"><mat-icon>groups</mat-icon> Atendimentos</button>
+      <button class="buttonMenu d-flex align-items-center" routerLink="/cadUsers"
+        (click)="drawer.close()"><mat-icon>group</mat-icon> Pacientes</button>
+      <button class="buttonMenu d-flex align-items-center" (click)="onLogout()"><mat-icon>sensor_door</mat-icon>
+        Sair</button>
     </mat-drawer>
 
     <div class="example-sidenav-content">
-      <button type="button" class="menu-b" matButton (click)="toggleSidenavAndButton()" mat-icon-button>
-        <mat-icon>menu</mat-icon>
-      </button>
-      
-      <router-outlet></router-outlet> 
+      <mat-toolbar class="top-toolbar d-flex align-items-center justify-content-between">
+        <button type="button" class="menu-b" matButton (click)="toggleSidenavAndButton()" mat-icon-button>
+          <mat-icon>menu</mat-icon>
+        </button>
+        <div class="h6 d-flex flex-row align-items-center m-0">
+          <mat-icon>person</mat-icon>
+          {{currentUser?.name }}
+        </div>
+      </mat-toolbar>
+
+      <div class="content-area-scrollable"> <router-outlet></router-outlet>
+      </div>
     </div>
   </mat-drawer-container>
 </header>

@@ -22,3 +22,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/cadastroPaciente', [PacienteController::class, 'store']);
+Route::get('pacientes', [PacienteController::class, 'index']);

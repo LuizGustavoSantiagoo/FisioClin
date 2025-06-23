@@ -8,18 +8,26 @@ use Illuminate\Http\Request;
 
 class PacienteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(Request $request)
     {
-        $pacientes = Paciente::all();
+        $query = Paciente::query();
+
+        if ($request->has('name') && !empty($request->input('name'))) {
+            $name = $request->input('name');
+            $query->where('name', 'like', '%' . $name . '%');
+        }
+
+        if ($request->has('cpf') && !empty($request->input('cpf'))) {
+            $cpf = $request->input('cpf');
+
+            $query->where('cpf', 'like', '%' . $cpf . '%');
+        }
+
+        $pacientes = $query->get();
+
         return response()->json($pacientes);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         try {
