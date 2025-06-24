@@ -42,15 +42,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    // Manter a inscrição para o currentUser$
     this.userSubscription = this.authService.currentUser$.subscribe(user => {
       this.currentUser = user;
-      // Reavaliar a visibilidade do botão quando o usuário muda (login/logout)
       this.checkTokenPresence();
     });
 
-    // Adicionar inscrição para eventos do router
-    // Isso é crucial para reavaliar a visibilidade do botão quando a URL muda (ex: após login)
     this.routerSubscription = this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
@@ -81,13 +77,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   private checkTokenPresence(): void {
-    const token = localStorage.getItem('authToken'); // Verificado que a chave é 'authToken'
-    const previousShowMenuButton = this.showMenuButton; // Capture o valor anterior
+    const token = localStorage.getItem('authToken');
     this.showMenuButton = !!token;
-
-    if (this.showMenuButton !== previousShowMenuButton) {
-      console.warn(`HeaderComponent - showMenuButton mudou de ${previousShowMenuButton} para ${this.showMenuButton}`);
-    }
-    console.log('HeaderComponent - checkTokenPresence executado. showMenuButton:', this.showMenuButton);
   }
 }

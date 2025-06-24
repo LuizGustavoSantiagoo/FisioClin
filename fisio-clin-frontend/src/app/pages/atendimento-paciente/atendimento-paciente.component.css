@@ -36,3 +36,16 @@
   flex-direction: column;
 }
 
+#success {
+  background-color: black;
+  height: 1px;
+  width: 100%;
+  margin-left: auto;
+  animation: retrair 3s forwards;
+}
+
+@keyframes retrair {
+  from { width: 100%; }
+  to   { width: 0%;   }
+}
+
