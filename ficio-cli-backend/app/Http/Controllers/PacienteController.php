@@ -64,7 +64,8 @@ class PacienteController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $paciente = Paciente::find($id);
+        return $paciente;
     }
 
     /**

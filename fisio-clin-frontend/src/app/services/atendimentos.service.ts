@@ -8,6 +8,7 @@ import { catchError, Observable, throwError } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+
 export class AtendimentosService {
   private apiUrl = environment.apiUrl;
 
@@ -20,22 +21,22 @@ export class AtendimentosService {
       'Authorization': `Bearer ${authToken}`
     });
 
-    return this.http.post<AtendimentoResponse>(`${this.apiUrl}/cadastroAtendimento`, atendimento, { headers }).pipe(
-          catchError(httpError => {
-            console.error('Erro na requisição HTTP ao cadastrar atendimento:', httpError);
-            let userMessage = 'Erro desconhecido ao cadastrar atendimento.';
+    return this.http.post<AtendimentoResponse>(`${this.apiUrl}/atendimentos`, atendimento, { headers }).pipe(
+      catchError(httpError => {
+        console.error('Erro na requisição HTTP ao cadastrar atendimento:', httpError);
+        let userMessage = 'Erro desconhecido ao cadastrar atendimento.';
 
-            if (httpError.error && httpError.error.message) {
-              userMessage = httpError.error.message;
-            } else if (typeof httpError.error === 'string') {
-              userMessage = httpError.error;
-            } else if (httpError.message) {
-              userMessage = httpError.message;
-            }
+        if (httpError.error && httpError.error.message) {
+          userMessage = httpError.error.message;
+        } else if (typeof httpError.error === 'string') {
+          userMessage = httpError.error;
+        } else if (httpError.message) {
+          userMessage = httpError.message;
+        }
 
-            return throwError(() => new Error(userMessage));
-          })
-        );
+        return throwError(() => new Error(userMessage));
+      })
+    );
   }
 }
 

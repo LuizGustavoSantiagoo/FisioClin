@@ -17,6 +17,33 @@ export class PacientesService {
     private authService: AuthService
   ) { }
 
+  getPacienteById(id: string): Observable<Paciente> {
+    const authToken = this.authService.getToken();
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${authToken}`
+    });
+
+    return this.http.get<Paciente>(`${this.apiUrl}/pacientes/${id}`, { headers }).pipe(
+      catchError(httpError => {
+        console.error(`Erro na requisição HTTP ao buscar paciente com ID ${id}:`, httpError);
+        let userMessage = 'Erro desconhecido ao carregar dados do paciente.';
+
+        if (httpError.status === 404) {
+          userMessage = 'Paciente não encontrado.';
+        } else if (httpError.error && httpError.error.message) {
+          userMessage = httpError.error.message;
+        } else if (typeof httpError.error === 'string') {
+          userMessage = httpError.error;
+        } else if (httpError.message) {
+          userMessage = httpError.message;
+        }
+
+        return throwError(() => new Error(userMessage));
+      })
+    );
+  }
+
   cadastrarPaciente(paciente: Paciente): Observable<CadastroResponse> {
     const authToken = this.authService.getToken();
     const headers = new HttpHeaders({
@@ -24,7 +51,7 @@ export class PacientesService {
       'Authorization': `Bearer ${authToken}`
     });
 
-    return this.http.post<CadastroResponse>(`${this.apiUrl}/cadastroPaciente`, paciente, { headers }).pipe(
+    return this.http.post<CadastroResponse>(`${this.apiUrl}/pacientes`, paciente, { headers }).pipe(
       catchError(httpError => {
         console.error('Erro na requisição HTTP ao cadastrar paciente:', httpError);
         let userMessage = 'Erro desconhecido ao cadastrar paciente.';

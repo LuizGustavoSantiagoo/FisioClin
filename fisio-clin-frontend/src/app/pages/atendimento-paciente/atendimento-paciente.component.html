@@ -1,19 +1,25 @@
 <div class="card shadow w-75 mt-3 m-auto p-2">
+
+  <div *ngIf="successMessage" class="alert alert-success" role="alert">
+    Atendimento realizado com sucesso!
+    <div id="success"></div>
+  </div>
+
   <div class="grid-paciente">
 
-    <div id="nome">
-      <label for="nome">Nome</label>
-      <input type="text" id="nome" class="form-control mx-1" disabled>
+    <div class="form-group-custom"> <label for="inputPacienteNome">Nome</label> <input type="text"
+        id="inputPacienteNome" class="form-control mx-1" [value]="paciente?.name" disabled>
     </div>
 
     <div>
       <label for="cpf">CPF</label>
-      <input type="text" id="cpf" class="form-control mx-1" disabled>
+      <input type="text" id="cpf" class="form-control mx-1" value="{{paciente?.cpf}}" disabled>
     </div>
 
     <div>
       <label for="data_nasc">Data de nascimento</label>
-      <input type="text" id="data_nasc" class="form-control mx-1" disabled>
+      <input type="text" id="data_nasc" class="form-control mx-1" value="{{paciente?.data_nasc | date:'dd/MM/yyyy'}}"
+        disabled>
     </div>
 
   </div>
@@ -33,12 +39,8 @@
         <label for="conclusao">Conclusão do atendimento</label>
         <textarea formControlName="conclusao" id="conclusao" class="form-control"></textarea>
       </div>
-
-        <input type="text"formControlName="id_fisio" value="{{currentUser?.id }}" hidden>
-        <input type="text"formControlName="id_paciente" value=" " hidden>
-
       <div class="d-flex justify-content-end">
-        <button class="btn btn-success mt-4">Gravar</button>
+        <button class="btn btn-success mt-4" [disabled]="atendimentoForm.invalid || isLoading">Gravar</button>
       </div>
     </form>
   </div>
