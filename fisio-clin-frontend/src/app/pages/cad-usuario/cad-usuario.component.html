@@ -1,4 +1,4 @@
-<main>
+<main class="card mt-2 m-auto" id="card">
     <div class="accordion" id="accordionExample">
         <div class="accordion-item">
             <h2 class="accordion-header" id="headingOne">
@@ -57,7 +57,7 @@
                                 Número de telefone é obrigatório.
                             </div>
                         </div>
-                        
+
                         <div *ngIf="errorMessage" class="alert alert-danger m-3">{{ errorMessage }}</div>
                         <div *ngIf="successMessage" class="alert alert-success m-3">{{ successMessage }}</div>
 
