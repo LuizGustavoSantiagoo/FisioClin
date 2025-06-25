@@ -5,6 +5,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { AuthGuard } from './features/auth/guards/auth.guard';
 import { CadUsuarioComponent } from './pages/cad-usuario/cad-usuario.component';
 import { AtendimentoPacienteComponent } from './pages/atendimento-paciente/atendimento-paciente.component';
+import { PacienteComponent } from './pages/paciente/paciente.component';
 export const routes: Routes = [
   {
     path: '',
@@ -17,13 +18,18 @@ export const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'cadUsers',
+    path: 'pacientes',
     component: CadUsuarioComponent,
     canActivate: [AuthGuard]
   },
   {
     path: 'atendimentoPaciente/:id',
     component: AtendimentoPacienteComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'perfilPaciente/:id',
+    component: PacienteComponent,
     canActivate: [AuthGuard]
   },
   {

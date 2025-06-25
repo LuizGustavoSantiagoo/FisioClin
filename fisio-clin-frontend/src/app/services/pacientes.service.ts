@@ -100,4 +100,30 @@ export class PacientesService {
 
     );
   }
+
+  setPacientes(paciente: Paciente, id: string): Observable<Paciente> {
+
+    const authToken = this.authService.getToken();
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${authToken}`
+    });
+
+    return this.http.put<Paciente>(`${this.apiUrl}/pacientes/${id}`, paciente, { headers }).pipe(
+      catchError(httpError => {
+        console.error('Erro na requisição HTTP ao atualizar paciente:', httpError);
+        let userMessage = 'Erro desconhecido ao atualizar paciente.';
+
+        if (httpError.error && httpError.error.message) {
+          userMessage = httpError.error.message;
+        } else if (typeof httpError.error === 'string') {
+          userMessage = httpError.error;
+        } else if (httpError.message) {
+          userMessage = httpError.message;
+        }
+
+        return throwError(() => new Error(userMessage));
+      })
+    );
+  }
 }

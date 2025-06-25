@@ -16,4 +16,8 @@ class Atendimentos extends Model
         'id_paciente',
         'id_fisio',
     ];
+
+    public function users() {
+        return $this->belongsTo(User::class, 'id_fisio', 'id');
+    }
 }

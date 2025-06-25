@@ -73,7 +73,20 @@ class PacienteController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $paciente = Paciente::find($id)->where('id', $id)->first();
+
+        if ($paciente) {
+            $paciente->name = $request->input('name');
+            $paciente->cpf = $request->input('cpf');
+            $paciente->data_nasc = $request->input('data_nasc');
+            $paciente->contato = $request->input('contato');
+
+            $paciente->save();
+
+            return response()->json(['message' => 'Paciente atualizado com sucesso!'], 200);
+        }
+
+        return response()->json(['message' => 'Paciente não encontrado.'], 404);
     }
 
     /**

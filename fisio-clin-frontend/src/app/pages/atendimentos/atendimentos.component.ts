@@ -103,6 +103,11 @@ export class AtendimentosComponent implements OnInit, OnDestroy {
       }
     }
 
+    if (!searchTerm) {
+      this.isLoading = false;
+      return;
+    }
+
     if (this.pacientesSubscription) {
       this.pacientesSubscription.unsubscribe();
     }

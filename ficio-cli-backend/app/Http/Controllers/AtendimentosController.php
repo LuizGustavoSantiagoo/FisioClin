@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Atendimentos;
+use App\Models\Paciente;
 use Illuminate\Validation\ValidationException;
 use GuzzleHttp\Psr7\Message;
 use Illuminate\Http\Request;
@@ -48,21 +49,26 @@ class AtendimentosController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id) {}
+    public function show(string $id)
+    {
+        $atendimento = Atendimentos::where('id_paciente', $id)->with('users')->get();
+        return $atendimento;
+    }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+    public function update(Request $request, string $id) {}
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+        $atendimento = Atendimentos::findOrFail($id);
+
+        $atendimento->delete();
+
+        return response()->json(null, 204);
     }
 }

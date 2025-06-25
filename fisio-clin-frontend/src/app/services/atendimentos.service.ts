@@ -38,6 +38,42 @@ export class AtendimentosService {
       })
     );
   }
+
+  getAtendimentosById(id: string): Observable<Atendimento[]> {
+    const authToken = this.authService.getToken();
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${authToken}`
+    });
+
+    return this.http.get<Atendimento[]>(`${this.apiUrl}/atendimentos/${id}`, {headers}).pipe(
+      catchError(
+        HttpError => {
+          console.log("Erro ao buscar atendimentos", HttpError);
+          const userMessage = "Erro desconhecido ao buscar atendimentos";
+          return throwError(() => new Error(userMessage));
+        }
+      )
+    );
+  }
+
+  delAtendimentos(id: string) {
+    const authToken = this.authService.getToken();
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${authToken}`
+    });
+
+    return this.http.delete<Atendimento[]>(`${this.apiUrl}/atendimentos/${id}`,  {headers}).pipe(
+      catchError(
+        HttpError => {
+          console.log("Erro ao buscar atendimentos", HttpError);
+          const userMessage = "Erro desconhecido ao buscar atendimentos";
+          return throwError(() => new Error(userMessage));
+        }
+      )
+    );
+  }
 }
 
 

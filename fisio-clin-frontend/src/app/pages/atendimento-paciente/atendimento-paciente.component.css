@@ -1,4 +1,3 @@
-/* Estilos padrão para o layout em telas pequenas (empilhadas) */
 .grid-paciente {
   display: grid;
   grid-template-columns: 1fr;

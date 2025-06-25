@@ -1,72 +1,138 @@
 <main class="card mt-2 m-auto" id="card">
-    <div class="accordion" id="accordionExample">
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                    aria-expanded="false" aria-controls="collapseOne">
-                    Buscar Paciente
-                </button>
-            </h2>
-            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                data-bs-parent="#accordionExample">
-                <div class="d-flex m-2 align-items-end">
-                    <div class="d-flex flex-column w-100">
-                        <label for="busca">Pesquisar paciente</label>
-                        <input type="text" id="busca" class="form-control" placeholder="Cpf ou Nome">
-                    </div>
-                    <button class="btn btn-primary d-flex align-items-center justify-content-center" id="search-b"><mat-icon>search</mat-icon></button>
-                </div>
+  <div class="accordion" id="accordionExample">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingOne">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+          aria-expanded="true" aria-controls="collapseOne"> Buscar Paciente
+        </button>
+      </h2>
+      <form [formGroup]="pacientGet" (ngSubmit)="onSubmitSearch()">
+        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+          data-bs-parent="#accordionExample">
+          <div class="accordion-body"> <div class="d-flex m-2 align-items-end">
+              <div class="d-flex flex-column w-100">
+                <label for="buscaPaciente">Pesquisar paciente</label> <input type="text" id="buscaPaciente" formControlName="nameOrCpf" class="form-control" placeholder="Cpf ou Nome">
+              </div>
+              <button class="btn btn-primary d-flex align-items-center justify-content-center ms-2" type="submit" id="search-b"
+                [disabled]="!pacientGet.get('nameOrCpf')?.value && !pacientGet.get('nameOrCpf')?.touched">
+                <mat-icon>search</mat-icon>
+              </button>
+              <button *ngIf="pacientGet.get('nameOrCpf')?.value" type="button" class="btn btn-outline-secondary d-flex align-items-center justify-content-center ms-2" (click)="pacientGet.get('nameOrCpf')?.setValue(''); onSubmitSearch()">
+                <mat-icon>close</mat-icon>
+              </button>
             </div>
-        </div>
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingTwo">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                    Cadastrar Paciente
-                </button>
-            </h2>
-            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                    <form [formGroup]="pacienteForm" (ngSubmit)="onSubmit()">
-                        <div class=" d-flex flex-column m-3">
-                            <label for="nome">Nome do paciente</label>
-                            <input class="form-control" type="text" id="nome" formControlName="name" placeholder="Nome do paciente">
-                            <div *ngIf="pacienteForm.get('nome')?.invalid && pacienteForm.get('nome')?.touched" class="text-danger mt-1">
-                                Nome é obrigatório.
-                            </div>
-                        </div>
-                        <div class=" d-flex flex-column m-3">
-                            <label for="cpf">Cpf</label>
-                            <input class="form-control" type="number" id="cpf" formControlName="cpf" placeholder="CPF">
-                            <div *ngIf="pacienteForm.get('cpf')?.invalid && pacienteForm.get('cpf')?.touched" class="text-danger mt-1">
-                                CPF é obrigatório e deve ter 11 dígitos.
-                            </div>
-                        </div>
-                        <div class=" d-flex flex-column m-3">
-                            <label for="data_nascimento">Data de nascimento</label>
-                            <input class="form-control" type="date" id="data_nascimento" formControlName="data_nasc">
-                            <div *ngIf="pacienteForm.get('data_nascimento')?.invalid && pacienteForm.get('data_nascimento')?.touched" class="text-danger mt-1">
-                                Data de nascimento é obrigatória.
-                            </div>
-                        </div>
-                        <div class=" d-flex flex-column m-3">
-                            <label for="numero_telefone">Numero de telefone</label>
-                            <input class="form-control" type="number" id="numero_telefone" formControlName="contato" placeholder="Numero para contato">
-                            <div *ngIf="pacienteForm.get('numero_telefone')?.invalid && pacienteForm.get('numero_telefone')?.touched" class="text-danger mt-1">
-                                Número de telefone é obrigatório.
-                            </div>
-                        </div>
 
-                        <div *ngIf="errorMessage" class="alert alert-danger m-3">{{ errorMessage }}</div>
-                        <div *ngIf="successMessage" class="alert alert-success m-3">{{ successMessage }}</div>
-
-                        <div class="d-flex align-items-center justify-content-end m-3">
-                            <button type="submit" class="btn btn-success" [disabled]="pacienteForm.invalid">Cadastrar</button>
-                        </div>
-                    </form>
-                </div>
+            <div *ngIf="isLoading && pacientes.length === 0" class="alert alert-info mx-2 my-2">
+              Carregando pacientes...
             </div>
+            <div *ngIf="errorMessage && !isLoading" class="alert alert-danger mx-2 my-2">
+              {{ errorMessage }}
+              <button mat-button color="warn" (click)="loadPacientes()">Tentar novamente</button>
+            </div>
+            <div *ngIf="successMessage" class="alert alert-success mx-2 my-2">
+              {{ successMessage }}
+            </div>
+
+            <div *ngIf="!isLoading && !errorMessage" class="mx-2 my-3 border rounded">
+              <table mat-table [dataSource]="pacientes" class="mat-elevation-z8 w-100" id="pacientesTable">
+
+                <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef> Nome </th>
+                  <td mat-cell *matCellDef="let paciente"> {{ paciente.name }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="cpf">
+                  <th mat-header-cell *matHeaderCellDef> CPF </th>
+                  <td mat-cell *matCellDef="let paciente"> {{ paciente.cpf }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="data_nasc">
+                  <th mat-header-cell *matHeaderCellDef> Data Nasc. </th>
+                  <td mat-cell *matCellDef="let paciente"> {{ paciente.data_nasc | date:'dd/MM/yyyy' }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="contato">
+                  <th mat-header-cell *matHeaderCellDef> Telefone </th>
+                  <td mat-cell *matCellDef="let paciente"> {{ paciente.contato }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="actions">
+                  <th mat-header-cell *matHeaderCellDef>Atender</th>
+                  <td mat-cell *matCellDef="let paciente"> <button class="btn btn-primary d-flex align-items-center justify-content-center"
+                     [routerLink]="['/perfilPaciente', paciente.id]">
+                      <mat-icon>meeting_room</mat-icon>
+                    </button>
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+
+              <div *ngIf="pacientes.length === 0 && pacientGet.get('nameOrCpf')?.value" class="alert alert-warning text-center m-2">
+                Nenhum paciente encontrado com o termo de busca "{{ pacientGet.get('nameOrCpf')?.value }}".
+              </div>
+              <div *ngIf="pacientes.length === 0 && !pacientGet.get('nameOrCpf')?.value && !isLoading" class="alert alert-info text-center m-2">
+                Nenhum paciente cadastrado.
+              </div>
+            </div>
+          </div>
         </div>
+      </form>
     </div>
+
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingTwo">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+          aria-expanded="false" aria-controls="collapseTwo">
+          Cadastrar Paciente
+        </button>
+      </h2>
+      <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+        data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+          <form [formGroup]="pacienteForm" (ngSubmit)="onSubmitCadastro()">
+            <div class="d-flex flex-column m-3">
+              <label for="inputNomeCadastro">Nome do paciente</label> <input class="form-control" type="text" id="inputNomeCadastro" formControlName="name" placeholder="Nome do paciente">
+              <div *ngIf="pacienteForm.get('name')?.invalid && pacienteForm.get('name')?.touched"
+                class="text-danger mt-1">
+                Nome é obrigatório.
+              </div>
+            </div>
+            <div class="d-flex flex-column m-3">
+              <label for="inputCpfCadastro">Cpf</label> <input class="form-control" type="text" id="inputCpfCadastro" formControlName="cpf" placeholder="CPF">
+              <div *ngIf="pacienteForm.get('cpf')?.invalid && pacienteForm.get('cpf')?.touched"
+                class="text-danger mt-1">
+                CPF é obrigatório e deve ter 11 dígitos.
+              </div>
+            </div>
+            <div class="d-flex flex-column m-3">
+              <label for="inputDataNascCadastro">Data de nascimento</label> <input class="form-control" type="date" id="inputDataNascCadastro" formControlName="data_nasc">
+              <div *ngIf="pacienteForm.get('data_nasc')?.invalid && pacienteForm.get('data_nasc')?.touched"
+                class="text-danger mt-1">
+                Data de nascimento é obrigatória.
+              </div>
+            </div>
+            <div class="d-flex flex-column m-3">
+              <label for="inputTelefoneCadastro">Numero de telefone</label> <input class="form-control" type="text" id="inputTelefoneCadastro" formControlName="contato"
+                placeholder="Numero para contato">
+              <div *ngIf="pacienteForm.get('contato')?.invalid && pacienteForm.get('contato')?.touched"
+                class="text-danger mt-1">
+                Número de telefone é obrigatório.
+              </div>
+            </div>
+
+            <div *ngIf="errorMessage && !isLoading" class="alert alert-danger m-3">{{ errorMessage }}</div>
+            <div *ngIf="successMessage && !isLoading" class="alert alert-success m-3">{{ successMessage }}</div>
+            <div *ngIf="isLoading" class="alert alert-info m-3">Cadastrando paciente...</div>
+
+
+            <div class="d-flex align-items-center justify-content-end m-3">
+              <button type="submit" class="btn btn-success" [disabled]="pacienteForm.invalid || isLoading">Cadastrar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </main>
