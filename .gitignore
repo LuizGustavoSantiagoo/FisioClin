@@ -11,9 +11,10 @@
 /backend/storage/logs/*.log
 
 # Angular - frontend
-/frontend/node_modules/
+/fisio-clin-frontend/node_modules/
 /frontend/dist/
 /frontend/.angular/cache/
+/node_modules
 
 # Sistema operacional
 .DS_Store

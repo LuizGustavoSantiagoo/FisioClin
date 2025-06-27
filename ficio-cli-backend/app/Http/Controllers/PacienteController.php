@@ -8,18 +8,26 @@ use Illuminate\Http\Request;
 
 class PacienteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(Request $request)
     {
-        $pacientes = Paciente::all();
+        $query = Paciente::query();
+
+        if ($request->has('name') && !empty($request->input('name'))) {
+            $name = $request->input('name');
+            $query->where('name', 'like', '%' . $name . '%');
+        }
+
+        if ($request->has('cpf') && !empty($request->input('cpf'))) {
+            $cpf = $request->input('cpf');
+
+            $query->where('cpf', 'like', '%' . $cpf . '%');
+        }
+
+        $pacientes = $query->get();
+
         return response()->json($pacientes);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         try {
@@ -56,7 +64,8 @@ class PacienteController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $paciente = Paciente::find($id);
+        return $paciente;
     }
 
     /**
@@ -64,7 +73,20 @@ class PacienteController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $paciente = Paciente::find($id)->where('id', $id)->first();
+
+        if ($paciente) {
+            $paciente->name = $request->input('name');
+            $paciente->cpf = $request->input('cpf');
+            $paciente->data_nasc = $request->input('data_nasc');
+            $paciente->contato = $request->input('contato');
+
+            $paciente->save();
+
+            return response()->json(['message' => 'Paciente atualizado com sucesso!'], 200);
+        }
+
+        return response()->json(['message' => 'Paciente não encontrado.'], 404);
     }
 
     /**

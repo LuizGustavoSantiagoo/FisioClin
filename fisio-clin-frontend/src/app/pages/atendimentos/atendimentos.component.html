@@ -1,18 +1,69 @@
 <main>
-
-    <div class="card shadow">
-        <div class="d-flex m-2 align-items-end">
-            <div class="d-flex flex-column w-100">
-                <label for="busca">Pesquisar paciente</label>
-                <input type="text" id="busca" class="form-control" placeholder="Cpf ou Nome">
-            </div>
-            <button class="btn btn-primary d-flex align-items-center justify-content-center" id="search-b">
-                <mat-icon>search</mat-icon>
-            </button>
+  <div id="body" class="card shadow my-3">
+    <form [formGroup]="atendimentos">
+      <div class="d-flex mx-5 mt-3 align-items-end">
+        <div class="d-flex flex-column w-100">
+          <label for="busca" class="h6">Pesquisar paciente</label>
+          <input type="text" id="busca" formControlName="nameOrCpf" class="form-control" placeholder="Cpf ou Nome">
         </div>
+        <button class="btn btn-primary d-flex align-items-center justify-content-center" id="search-b" type="button"
+          (click)="onSearchButtonClick()">
+          <mat-icon>search</mat-icon>
+        </button>
+      </div>
+    </form>
 
-        <div>
-
-        </div>
+    <div *ngIf="isLoading" style="text-align: center; margin: 20px;">
+      <mat-spinner diameter="50"></mat-spinner>
+      <p>Carregando pacientes...</p>
     </div>
+
+    <div *ngIf="errorMessage" class="alert alert-danger mx-2">
+      {{ errorMessage }}
+      <button mat-button color="warn" (click)="loadPacientes()">Tentar novamente</button>
+    </div>
+
+    <div *ngIf="!isLoading && !errorMessage && pacientes.length > 0" class="mx-5 my-3 border rounded">
+      <table mat-table [dataSource]="pacientes" class="mat-elevation-z8 w-100">
+
+        <ng-container matColumnDef="name" id="nome">
+          <th mat-header-cell *matHeaderCellDef> Nome </th>
+          <td mat-cell *matCellDef="let paciente"> {{ paciente.name }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="cpf" id="cpf">
+          <th mat-header-cell *matHeaderCellDef> CPF </th>
+          <td mat-cell *matCellDef="let paciente"> {{ paciente.cpf }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="data_nasc" id="nasc">
+          <th mat-header-cell *matHeaderCellDef> Data Nasc. </th>
+          <td mat-cell *matCellDef="let paciente"> {{ paciente.data_nasc }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="contato" id="tel">
+          <th mat-header-cell *matHeaderCellDef> Telefone </th>
+          <td mat-cell *matCellDef="let paciente"> {{ paciente.contato }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions" id="act">
+          <th mat-header-cell *matHeaderCellDef>Atender</th>
+          <td mat-cell *matCellDef="let actions">
+            <button class="btn btn-primary d-flex align-items-center justify-content-center"
+              [routerLink]="['/atendimentoPaciente', actions.id]"><mat-icon>local_hospital</mat-icon></button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns" id=""></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+
+    <div *ngIf="!isLoading && !errorMessage && pacientes.length === 0" style="text-align: center; margin: 20px;">
+      <p>Nenhum paciente encontrado.</p>
+    </div>
+    <div class="d-flex p-2 justify-content-end">
+      <button mat-raised-button class="btn btn-success" routerLink="/cadUsers">Cadastrar Novo Paciente</button>
+    </div>
+  </div>
 </main>

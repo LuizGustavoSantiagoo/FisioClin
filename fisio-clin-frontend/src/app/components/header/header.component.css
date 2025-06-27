@@ -1,6 +1,3 @@
-/* src/app/components/header/header.component.css */
-
-/* Garante que o header ocupe toda a altura e seja um container flexível */
 #cabecalho {
   height: 100vh;
   display: flex;
@@ -8,17 +5,12 @@
   width: 100%;
 }
 
-/* O mat-drawer-container deve preencher o header */
 .mat-drawer-container {
   height: 100%;
   background-color: transparent;
-  /* REMOVIDO: display: flex; e flex-grow: 1; daqui. */
-  /* Com mode="over", o mat-sidenav-container NÃO usa flexbox para seus filhos diretos.
-     Ele posiciona o drawer em overlay (absolutamente), e o conteúdo principal flui normalmente. */
-  position: relative; /* Importante para o posicionamento absoluto do mat-drawer */
+  position: relative;
 }
 
-/* Estilos para o mat-drawer (o próprio menu lateral) */
 .menu-lat {
   width: 250px;
   background-color: #22394E;
@@ -26,38 +18,34 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centraliza horizontalmente o bloco de info e botões */
+  align-items: center;
   padding: 0;
-  z-index: 10; /* Garante que o sidenav fique por cima do conteúdo */
-  box-shadow: 2px 0 6px rgba(0,0,0,0.2); /* Adiciona uma sombra para destacar o overlay */
+  z-index: 10;
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.2);
 }
 
-/* Estilos para o bloco de informações do usuário no topo do sidenav */
-.menu-lat > .d-flex.align-items-center.flex-column.justify-content-center {
-    background-color: white;
-    color: #22394E;
-    width: 90%;
-    margin: 20px auto;
-    padding: 15px 10px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    flex-shrink: 0;
+.menu-lat>.d-flex.align-items-center.flex-column.justify-content-center {
+  background-color: white;
+  color: #22394E;
+  width: 90%;
+  margin: 20px auto;
+  padding: 15px 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  flex-shrink: 0;
 }
 
-/* Estilos para o conteúdo principal dentro do mat-drawer (os botões de navegação) */
-/* (Este é o .mat-drawer-content gerado pelo Angular Material para o conteúdo do sidenav) */
 .mat-drawer-content {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    height: 100%;
-    width: 100%;
-    gap: 5px;
-    box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 100%;
+  width: 100%;
+  gap: 5px;
+  box-sizing: border-box;
 }
 
-/* Estilos para os botões do menu */
 .buttonMenu {
   width: 100%;
   border: none;
@@ -79,24 +67,44 @@
   background-color: #2364a1;
 }
 
-/* Estilos para o example-sidenav-content (área de conteúdo principal da página) */
-/* Esta área SEMPRE ocupará 100% da largura, pois o sidenav estará em overlay */
 .example-sidenav-content {
-  width: 100%; /* Ocupa 100% da largura de seu container (.mat-drawer-container) */
-  height: 100%; /* Ocupa 100% da altura de seu container */
-  overflow-y: auto; /* IMPORTANTE: Adiciona rolagem se o conteúdo for muito grande */
-  background-color: #f0f2f5; /* Cor de fundo para a área principal */
-  padding: 20px; /* Padding interno para o conteúdo da página */
+  width: 100%;
+  height: 100%;
+  padding: 0;
   box-sizing: border-box;
-  
-  /* Mantenha o display flex e flex-direction column para organizar
-     o botão de menu externo e o router-outlet */
+  background-color: #f0f2f5;
+
   display: flex;
   flex-direction: column;
 }
 
-/* Estilos Globais (em src/styles.css ou src/styles.scss) - INALTERADOS */
-html, body {
+.top-toolbar {
+  height: 5vh;
+  min-height: 56px;
+  background-color: white;
+  color: #333;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+.top-toolbar .menu-b {
+  margin-right: 16px;
+}
+
+.content-area-scrollable {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+html,
+body {
   height: 100%;
   margin: 0;
   padding: 0;
@@ -108,8 +116,4 @@ app-root {
   flex-direction: column;
   min-height: 100vh;
   width: 100%;
-}
-
-main {
-  width: 85%;
 }

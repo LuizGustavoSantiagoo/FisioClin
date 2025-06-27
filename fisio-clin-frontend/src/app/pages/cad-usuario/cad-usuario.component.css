@@ -1,3 +1,42 @@
 #search-b {
-    padding: 6px;
+  padding: 6px;
+}
+
+#card {
+  width: 95%;
+  margin: 15px auto;
+}
+
+.mat-column-cpf,
+.mat-column-data_nasc,
+.mat-column-contato {
+  display: none;
+}
+
+@media (min-width: 500px) {
+
+  .mat-column-cpf {
+    display: table-cell;
+  }
+}
+
+@media (min-width: 600px) {
+  #card {
+    width: 80%;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 750px) {
+
+  .mat-column-data_nasc {
+    display: table-cell;
+  }
+}
+
+@media (min-width: 800px) {
+
+  .mat-column-contato {
+    display: table-cell;
+  }
 }
