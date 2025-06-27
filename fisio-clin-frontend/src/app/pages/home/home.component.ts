@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from '../../components/header/header.component';
-import { Router, RouterOutlet } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
+import { User } from '../../interfaces/user.interface';
+import { Subscription } from 'rxjs';
+import { AuthService } from '../../features/auth/services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -11,5 +14,4 @@ import { Router, RouterOutlet } from '@angular/router';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-
 }
