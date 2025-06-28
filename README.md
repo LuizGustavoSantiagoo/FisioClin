@@ -55,4 +55,6 @@ Este projeto desenvolve um sistema para registrar consultas/atendimentos de fisi
 - após estes passos rodar os servidores de desenvolvimento.
 - `php artisan serve` para subir o servidor do laravel backend.
 - `ng serve --open` após o servidor subir abrira automaticamente a pagina de login.
-- após todos estes passos a aplicação já esta rodando. 
+- após todos estes passos a aplicação já esta rodando.
+## Design System
+- figma: <a target="_blank" href="https://www.figma.com/design/yjgZtPqUMA0kvWnIZzmKpP/Design-System---FisioClin?node-id=0-1&p=f&t=10y5jkHbsOMJICou-0">Figma</a>
