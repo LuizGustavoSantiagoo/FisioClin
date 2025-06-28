@@ -39,12 +39,10 @@ export class LoginPageComponent implements OnInit {
       this.authService.login({ email, senha }).subscribe({
         next: (response) => {
           console.log('Login bem-sucedido! O AuthService salvou os dados.', response);
-          // O redirecionamento aqui significa que o login foi completo e os dados estão salvos.
           this.router.navigate(['/home']);
         },
         error: (error) => {
           console.error('Erro no login:', error);
-          // A mensagem de erro já deve vir formatada do AuthService ou do backend
           this.errorMessage = error.message || 'Ocorreu um erro. Tente novamente mais tarde.';
         }
       });

@@ -30,15 +30,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
   showFiller = false;
   currentUser: User | null = null;
   private userSubscription: Subscription | undefined;
-  private routerSubscription: Subscription | undefined; // Necessário para desinscrever
-
+  private routerSubscription: Subscription | undefined; 
   @ViewChild('drawer') drawer!: MatDrawer;
 
   showMenuButton: boolean = false;
 
   constructor(
     public authService: AuthService,
-    private router: Router // Injetar o Router para observar eventos de navegação
+    private router: Router 
   ) { }
 
   ngOnInit(): void {
