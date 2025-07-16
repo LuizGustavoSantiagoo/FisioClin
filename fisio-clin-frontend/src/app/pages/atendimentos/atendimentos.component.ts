@@ -39,6 +39,7 @@ export class AtendimentosComponent implements OnInit, OnDestroy {
   errorMessage: string | null = null;
 
   ngOnInit(): void {
+    
     this.atendimentos = this.fb.group({
       nameOrCpf: ['']
     });

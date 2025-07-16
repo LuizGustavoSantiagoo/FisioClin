@@ -7,10 +7,12 @@
         <p>{{currentUser?.name }}</p>
       </div>
       @if (currentUser?.role === "ADMIN") {
-      <button class="buttonMenu d-flex align-items-center" routerLink="/usuarios"
+      <button class="buttonMenu d-flex align-items-center" routerLink="/cadastro_fisioterapeutas"
         (click)="drawer.close()"><mat-icon>person_add</mat-icon> Usuarios</button>
+
       <button class="buttonMenu d-flex align-items-center" routerLink="/configuracoes"
         (click)="drawer.close()"><mat-icon>settings</mat-icon> Configurações</button>
+
       }
       <button class="buttonMenu d-flex align-items-center" routerLink="/perfil"
         (click)="drawer.close()"><mat-icon>person</mat-icon>Perfil</button>

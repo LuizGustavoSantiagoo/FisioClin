@@ -34,16 +34,13 @@ export class AuthService {
    * @returns Observable da resposta do login.
    */
   login(credentials: { email: string, senha: string }): Observable<LoginResponse> {
-    // O endpoint de login no Laravel geralmente é /api/login
     return this.http.post<LoginResponse>(`${this.apiUrl}/login`, credentials).pipe(
       tap(response => {
         // Se a requisição foi bem-sucedida (status 200 OK), a resposta é processada aqui
         if (response.token && response.user) {
           this.setSession(response.token, response.user);
         } else {
-          // Tratar caso a resposta não contenha token ou user (ex: erro no backend)
           console.error('Resposta de login inválida: token ou user ausente.', response);
-          // Opcional: throw um erro para que o componente possa tratar
           throw new Error('Credenciais inválidas ou erro no servidor.');
         }
       }),

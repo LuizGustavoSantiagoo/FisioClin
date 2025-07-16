@@ -45,6 +45,7 @@ export class PacientesService {
   }
 
   cadastrarPaciente(paciente: Paciente): Observable<CadastroResponse> {
+    
     const authToken = this.authService.getToken();
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',

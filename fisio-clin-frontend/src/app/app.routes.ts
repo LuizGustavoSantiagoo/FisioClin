@@ -6,6 +6,7 @@ import { AuthGuard } from './features/auth/guards/auth.guard';
 import { CadUsuarioComponent } from './pages/cad-usuario/cad-usuario.component';
 import { AtendimentoPacienteComponent } from './pages/atendimento-paciente/atendimento-paciente.component';
 import { PacienteComponent } from './pages/paciente/paciente.component';
+import { CadFisioterapeutasComponent } from './pages/cad-fisioterapeutas/cad-fisioterapeutas.component';
 export const routes: Routes = [
   {
     path: '',
@@ -15,6 +16,11 @@ export const routes: Routes = [
   {
     path: 'atendimentos',
     component: AtendimentosComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'cadastro_fisioterapeutas',
+    component: CadFisioterapeutasComponent,
     canActivate: [AuthGuard]
   },
   {

@@ -153,6 +153,7 @@ export class CadUsuarioComponent implements OnInit, OnDestroy {
       }
 
       this.cadastroSubscription = this.pacientesService.cadastrarPaciente(dadosParaCadastro).subscribe({
+        
         next: (response: { message: string; paciente: Paciente; }) => {
           this.successMessage = response.message || 'Paciente cadastrado com sucesso!';
           this.errorMessage = null;
